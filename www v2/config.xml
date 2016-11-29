@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="org.camden.pgdiary" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>PGDiary</name>
+    <name>Diario</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Um aplicativo de diário
     </description>
-    <author email="callback-dev@incubator.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="mrbr1ckfy@gmail.com">
+        Matheus A.
     </author>
     <icon height="512" src="res/icon/cordova_512.png" width="512" />
     <icon gap:platform="android" height="96" src="res/icon/cordova_android_96.png" width="96" />

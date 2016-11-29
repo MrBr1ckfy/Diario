@@ -6,7 +6,7 @@ document.addEventListener('deviceready', deviceready, false);
 function deviceready() {
 	console.log('deviceready');
 
-	//create a new instance of our Diary and listen for it to complete it's setup
+	// Cria uma instância do Diário e, quando criar, inicia o app
 	diary = new Diary();
 	diary.setup(startApp);
 
@@ -14,7 +14,7 @@ function deviceready() {
 }
 
 /*
-Main application handler. At this point my database is setup and I can start listening for events.
+ Start do aplicativo. Como temos um initialize da Database, ela já foi criada e não precisamos nos preocupar
 */
 
 function startApp() {
@@ -36,7 +36,7 @@ function startApp() {
 
 function pageLoad(u) {
 	console.log("load "+u);
-	//convert url params into an ob
+	// Converte os parametros em objetos
 	var data = {};
 	if(u.indexOf("?") >= 0) {
 		var qs = u.split("?")[1];
@@ -65,13 +65,13 @@ $(document).on("pageload", "#mainPage", function(e) {
 		}
 		$("#entryList").html(s);
 
-		//Listen for add clicks
+		// Cria os listeners dos Clicks
 		$("#addEntryBtn").on("touchstart", function(e) {
 			e.preventDefault();
 			pageLoad("add.html");
 		});
 
-		//Listen for entry clicks
+		// Cria os listeners dos Clicks
 		$("#entryList div").on("touchstart", function(e) { 
 			e.preventDefault();
 			console.log("entry click");
@@ -97,6 +97,8 @@ $(document).on("pageload", "#entryPage", function(e) {
 
 $(document).on("pageload", "#addPage", function(e) {
 
+	/* Juro que tentei fazer a camera funcionar */
+
 	function onCamSuccess(imgdata) {
 		console.log(imgdata);
 		$("#entryPicture").val(imgdata);
@@ -116,11 +118,11 @@ $(document).on("pageload", "#addPage", function(e) {
 	
 	$("#addEntrySubmit").on("touchstart", function(e) {
 		e.preventDefault();
-		//grab the values
+		
 		var title = $("#entryTitle").val();
 		var body = $("#entryBody").val();
 		var img = $("#entryPicture").val();
-		//store!
+		
 		diary.saveEntry({title:title,body:body,image:img}, function() {
 			pageLoad("main.html");
 		});
@@ -129,6 +131,7 @@ $(document).on("pageload", "#addPage", function(e) {
 });
 
 
+// Function para formatar a data/hora
 function dtFormat(input) {
     if(!input) return "";
 	input = new Date(input);

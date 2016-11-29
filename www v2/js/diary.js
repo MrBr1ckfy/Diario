@@ -4,19 +4,19 @@ function Diary() {
 
 Diary.prototype.setup = function(callback) {
 
-	//First, setup the database
+	// Configura o BD
 	this.db = window.openDatabase("diary", 1, "diary", 1000000);
 	this.db.transaction(this.initDB, this.dbErrorHandler, callback);
 
 }
 
-//Geenric database error handler. Won't do anything for now.
+// Handle de erro pra evitar crash
 Diary.prototype.dbErrorHandler = function(e) {
 	console.log('DB Error');
 	console.dir(e);
 }
 
-//I initialize the database structure
+// Inicializa a estrutura do BD
 Diary.prototype.initDB = function(t) {
 	t.executeSql('create table if not exists diary(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, body TEXT, image TEXT, published DATE)');
 }
@@ -47,7 +47,6 @@ Diary.prototype.getEntry = function(id, callback) {
 
 }
 
-//No support for edits yet
 Diary.prototype.saveEntry = function(data, callback) {
 console.dir(data);
 	this.db.transaction(
@@ -59,7 +58,7 @@ console.dir(data);
 		}, this.dbErrorHandler);
 }
 
-//Utility to convert record sets into array of obs
+// Transforma registros em arrays
 Diary.prototype.fixResults = function(res) {
 	var result = [];
 	for(var i=0, len=res.rows.length; i<len; i++) {
@@ -69,7 +68,7 @@ Diary.prototype.fixResults = function(res) {
 	return result;
 }
 
-//I'm a lot like fixResults, but I'm only used in the context of expecting one row, so I return an ob, not an array
+// Retorna um objeto em vez de array, que por algum motivo dá erro se não for assim.
 Diary.prototype.fixResult = function(res) {
 	if(res.rows.length) {
 		return res.rows.item(0);
